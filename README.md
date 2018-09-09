@@ -19,14 +19,28 @@ Rlsl targets the [logical addressing model](https://www.khronos.org/registry/spi
 * Reflection *TODO*
 * Support library for interop between Rust and rlsl for uniforms (std140, std420) *TODO*
 
-## Installation
- *TODO*
+## Usage
 
-## How?
+The **rlsl** executable acts as a simple wrapper around the `rustc` compiler.
 
-```
-RUSTC=rlsl cargo build
-```
+1. **Install rlsl** with `cargo install rlsl`.
+
+2. **Write a function** that you would like to compile to SPIR-V.
+
+   Decorate the function with either:
+   
+   - `#[spirv(compute)]`
+   - `#[spirv(fragment)]`
+   - `#[spirv(vertex)]`
+
+   depending on the kind of entry-point you would like to compile.
+
+   *See the `issues/` directory for a demonstration project.*
+
+3. **Build the project** with `RUSTC=rlsl cargo build`.
+
+   A `.shaders/` directory will be generated containing a `*.spv` file for each
+   of the decorated, entry-point functions.
 
 ![compile](https://raw.githubusercontent.com/MaikKlein/rlsl/master/media/compile.gif)
 
